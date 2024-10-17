@@ -1,99 +1,72 @@
-# Deepfake Detection Web Application
+# Detection of Deepfake Media
 
-This web application allows users to upload a video, which is then analyzed to detect whether it contains deepfake content. The app processes the video, extracts frames, and uses a pre-trained deep learning model to evaluate each frame's authenticity.
+This application detects deepfake content in uploaded videos by extracting frames and analyzing them using a pre-trained deep learning model, **MesoNet**, specifically designed for deepfake detection.
 
-## Features
+### Project Flow
 
-- Video upload via a web interface
-- Frame extraction from the uploaded video
-- Deepfake detection on extracted frames
-- Results displayed with confidence scores
+![Flow](./github_assests/flow.png)
 
-## Requirements
+## Key Features
 
-To run this application, you'll need the following libraries installed:
+- **Video Upload**: Simple web interface for users to upload videos.
+- **Frame Extraction**: Automatic extraction of frames from uploaded videos.
+- **Deepfake Detection**: Each frame is analyzed for deepfake content using the MesoNet model.
+- **Results Display**: Confidence scores for each frame along with an overall deepfake prediction for the video.
 
-```bash
-opencv-python-headless
-numpy
-tensorflow
-django
-```
+## MesoNet Model
 
-## Installation
+The application leverages the **MesoNet** model, a specialized deep learning architecture for detecting deepfake content by analyzing mesoscopic features of images. 
 
-1. **Clone the repository:**
+- **Efficient Detection**: MesoNet uses shallow convolutional layers to capture subtle artifacts introduced by deepfake generation techniques.
+- **Variants**: The model comes in two forms, Meso-4 (lightweight) and MesoInception-4 (with inception modules for multi-scale feature extraction). In this application, we use a pre-trained version optimized for deepfake detection.
+- **Frame Evaluation**: Each extracted frame is passed through the MesoNet model, and the system generates confidence scores indicating the likelihood of deepfake content.
 
-   ```bash
-   git clone https://github.com/ShafeeqAhamedS/deepfake-detection.git
-   cd deepfake-detection
-   ```
+### Model Architecture
 
-2. **Create a virtual environment (optional but recommended):**
+![model](./github_assests/mesonet_arch.ppm)
 
-   ```bash
-   python -m venv venv
-   venv\Scripts\activate
-   ```
+## Prerequisites
 
-3. **Install the required libraries:**
+Ensure you have Docker installed on your system.
+
+## Setup with Docker
+
+1. **Pull the Docker Image:**
 
    ```bash
-   pip install -r requirements.txt
+   docker pull shafeeq2804/deepfake-detection
    ```
 
-4. **Set up Django:**
-
-   - Apply migrations:
-   
-     ```bash
-     python manage.py migrate
-     ```
-
-   - Create a superuser for the admin interface:
-
-     ```bash
-     python manage.py createsuperuser
-     ```
-
-## Usage
-
-1. **Run the Django development server:**
+2. **Run the Docker Container:**
 
    ```bash
-   python manage.py runserver 3000
+   docker run -p 3000:3000 shafeeq2804/deepfake-detection
    ```
 
-2. **Open your web browser and navigate to:**
+3. **Access the Web Interface:**
 
-   ```bash
-   http://127.0.0.1:3000/
-   ```
+   Visit [http://127.0.0.1:3000/](http://127.0.0.1:3000/) in your web browser.
 
-3. **Upload a video:**
+4. **Upload a Video:**
 
-   - Click on upload video to upload a video file.
-   - The server will process the video, extract frames, and evaluate them using the deepfake detection model.
+   - Upload a video for analysis.
+   - The system will process the video, extract frames, and analyze them for deepfake content using the MesoNet model.
 
-4. **View the results:**
+5. **View Results:**
 
-   - The results page will display each frame's evaluation, including the confidence score and the overall prediction for the video.
+   Results, including confidence scores for each frame and an overall prediction, are displayed after processing.
 
 ## Project Structure
 
-- **models/deepfake_detection_model.h5**: The pre-trained deepfake detection model.
-- **media/**: Directory for storing uploaded videos and extracted frames.
-- **app_name/**: Replace `app_name` with your actual Django app name containing:
-  - `views.py`: Contains the logic for video upload, frame extraction, and evaluation.
-  - `forms.py`: Contains the form for video upload.
-  - `templates/`: Directory for HTML templates.
+- **`models/deepfake_detection_model.h5`**: The pre-trained MesoNet model used for deepfake detection.
+- **`media/`**: Directory to store uploaded videos and extracted frames.
+- **`app/`**: The Django app containing:
+  - `views.py`: Logic for video upload, frame extraction, and analysis.
+  - `forms.py`: Contains the form for video uploads.
+  - `templates/`: HTML templates for the web interface.
 
-## Code Overview
+## Key Functions
 
-- **FrameCapture(path)**: Extracts frames from the video located at `path`.
-- **evaluate_frames(directory)**: Evaluates extracted frames for deepfake content.
-- **upload_video(request)**: Handles video upload and initiates the frame extraction and evaluation process.
-
-## Notes
-
-Ensure the pre-trained model is placed in the `models` directory and modified in `views.py`. The app is configured to delete and recreate the `media` directory with each new video upload to ensure a clean processing environment.
+- **`FrameCapture(path)`**: Extracts frames from the video.
+- **`evaluate_frames(directory)`**: Evaluates frames for deepfake content using the MesoNet model.
+- **`upload_video(request)`**: Handles the video upload, triggering frame extraction and analysis.
