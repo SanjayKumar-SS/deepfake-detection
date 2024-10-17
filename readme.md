@@ -26,7 +26,7 @@ django
 
    ```bash
    git clone https://github.com/ShafeeqAhamedS/deepfake-detection.git
-   cd deepfaker_deepfake_detector
+   cd deepfake-detection
    ```
 
 2. **Create a virtual environment (optional but recommended):**
