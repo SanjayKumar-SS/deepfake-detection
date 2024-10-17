@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload Video{% endblock %}
+
+{% block content %}
+    <div class="relative">
+        <!-- Background Image -->
+        <div class="absolute inset-0 bg-cover bg-center filter" style="background-image: url('https://www.europarl.europa.eu/resources/library/images/20230607PHT95601/20230607PHT95601_original.jpg');"></div>
+        <!-- Overlay -->
+        <div class="relative bg-blue-500 bg-opacity-70 min-h-screen flex flex-col items-center justify-center">
+            <h1 class="text-4xl font-bold text-white mb-8">Upload a Video for Deepfake Detection</h1>
+            <form method="post" enctype="multipart/form-data" class="bg-white bg-opacity-90 p-6 rounded shadow-md mb-4 max-w-md w-full">
+                {% csrf_token %}
+                
+                <!-- Custom Choose File Button -->
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-blue-900">Select a video:</label>
+                    <label for="fileInput" class="cursor-pointer bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 shadow-lg transition-all duration-300 ease-in-out inline-flex items-center justify-center">
+                        Choose file
+                        <input type="file" id="fileInput" name="video" class="hidden" onchange="handleFileChange()">
+                    </label>
+                    <span id="fileName" class="ml-2 text-blue-700">No file chosen</span>
+                </div>
+                
+                <div class="mb-4">
+                    <video id="videoPreview" class="hidden w-full" controls></video>
+                </div>
+                <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 shadow-lg transition-all duration-300 ease-in-out">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function handleFileChange() {
+            var fileInput = document.getElementById('fileInput');
+            var fileName = document.getElementById('fileName');
+            var videoPreview = document.getElementById('videoPreview');
+
+            if (fileInput.files.length > 0) {
+                var url = URL.createObjectURL(fileInput.files[0]);
+                videoPreview.src = url;
+                videoPreview.classList.remove('hidden');
+                fileName.textContent = fileInput.files[0].name;
+            } else {
+                videoPreview.src = '';
+                videoPreview.classList.add('hidden');
+                fileName.textContent = 'No file chosen';
+            }
+        }
+    </script>
+{% endblock %}

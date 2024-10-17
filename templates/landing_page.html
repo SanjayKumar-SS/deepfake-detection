@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="max-h-screen flex flex-col">
+        <!-- Section 2 - Deepfake Detection Features -->
+        <section class="flex-grow px-4 py-24 md:px-0">
+            <div class="container flex flex-wrap items-center max-w-6xl px-8 mx-auto xl:px-5">
+                <div class="w-full md:w-1/2 md:px-3">
+                    <div class="space-y-6 lg:space-y-8">
+                        <h1 class="text-4xl font-extrabold tracking-tight text-blue-900 lg:text-5xl">
+                            <span class="block xl:inline">Ensuring Video Authenticity with</span>
+                            <span class="block text-indigo-600 xl:inline">Deepfake Detection Technology.</span>
+                        </h1>
+                        <p class="text-base text-blue-700 lg:text-xl">Detect and validate videos instantly with our
+                            advanced deepfake detection algorithms. Protect yourself from deceptive content.</p>
+                        <div class="relative flex flex-col sm:flex-row sm:space-x-4">
+                            <a href="javascript:void(0)" onclick="showUploadModal()"
+                                class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-600 rounded-md hover:bg-indigo-700 sm:w-auto">
+                                Upload Video for Detection
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7v14"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 mt-10 md:mt-0">
+                    <div class="w-full h-auto overflow-hidden rounded-lg shadow-xl">
+                        <img src="https://lawtrend.in/wp-content/uploads/2023/11/ai-deep-fake.jpeg"
+                            alt="Deepfake Detection">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="fixed inset-0 bg-black bg-opacity-60 hidden">
+        <div class="relative min-h-screen flex items-center justify-center">
+            <div class="relative bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+                <h1 class="text-2xl font-bold text-black mb-4">Upload a Video for Deepfake Detection</h1>
+                <form method="post" enctype="multipart/form-data" class="space-y-4">
+                    {% csrf_token %}
+                    <div>
+                        {{ form.video.label_tag }}
+                        {{ form.video }}
+                    </div>
+                    <div>
+                        <video id="videoPreview" class="hidden w-full" controls></video>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Upload</button>
+                </form>
+                <button onclick="hideUploadModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Modal -->
+    <script>
+        function showUploadModal() {
+            document.getElementById('uploadModal').classList.remove('hidden');
+        }
+
+        function hideUploadModal() {
+            document.getElementById('uploadModal').classList.add('hidden');
+        }
+
+        document.getElementById('{{ form.video.id_for_label }}').addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            var videoPreview = document.getElementById('videoPreview');
+
+            if (file) {
+                var url = URL.createObjectURL(file);
+                videoPreview.src = url;
+                videoPreview.classList.remove('hidden');
+            } else {
+                videoPreview.src = '';
+                videoPreview.classList.add('hidden');
+            }
+        });
+    </script>
+{% endblock %}
