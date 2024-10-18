@@ -1,17 +1,41 @@
-# Detection of Deepfake Media
+# **Detection of Deepfake Media**
 
 This application detects deepfake content in uploaded videos by extracting frames and analyzing them using a pre-trained deep learning model, **MesoNet**, specifically designed for deepfake detection.
 
-### Project Flow
+## **About**
 
-![Flow](./github_assests/flow.png)
+The **Detection of Deepfake Media** is designed to verify video authenticity by detecting manipulated video content using advanced machine learning techniques. Leveraging the power of the MesoNet architecture, this project provides an intuitive interface that allows users to upload videos for real-time analysis. The system processes frames from each video, predicting whether they are genuine or deepfakes, along with a confidence score.
 
-## Key Features
+## **Features**
 
-- **Video Upload**: Simple web interface for users to upload videos.
-- **Frame Extraction**: Automatic extraction of frames from uploaded videos.
-- **Deepfake Detection**: Each frame is analyzed for deepfake content using the MesoNet model.
-- **Results Display**: Confidence scores for each frame along with an overall deepfake prediction for the video.
+- **Video Upload:** Users can upload MP4 videos for deepfake detection.
+- **Frame-by-Frame Analysis:** Each frame of the video is analyzed individually for accurate detection.
+- **Confidence Score:** The system provides a confidence score for each frame, showing the likelihood of it being a deepfake.
+- **Detailed Results:** The results include a comprehensive breakdown of real and fake frames.
+- **User-Friendly Interface:** Simple design for easy navigation and interaction, accessible to non-technical users.
+  
+## **Development Requirements**
+
+- **Operating System:** Requires a 64-bit OS (Windows 10, macOS, or Ubuntu) for compatibility with deep learning frameworks.
+- **Development Environment:** Python 3.10 or later is required for the implementation of the Detection of Deepfake Media.
+- **Deep Learning Frameworks:** Tensorflow is used for training and implementing the MesoNet model.
+- **Image Processing Libraries:** OpenCV is essential for extracting and processing video frames.
+- **Version Control:** Git for collaborative development and version control.
+- **IDE:** VSCode or PyCharm is recommended for coding and debugging.
+- **Additional Dependencies:** Includes NumPy, Scikit-learn, Django, Pillow, and Matplotlib.
+
+## **System Architecture**
+
+- **Frontend:** HTML5, CSS3, JavaScript for the user interface.
+- **Backend:** Django for handling requests and integrating the detection model.
+- **Model:** MesoNet model fine-tuned on the CelebDF dataset, trained to identify deepfake videos.
+- **Database:** A Local storage system for uploaded videos and analysis results.
+
+### **Diagram of System Architecture**
+
+![Flowchart](./github_assests/flowc.png)
+
+![Sequence](./github_assests/seq.png)
 
 ## MesoNet Model
 
@@ -70,3 +94,30 @@ Ensure you have Docker installed on your system.
 - **`FrameCapture(path)`**: Extracts frames from the video.
 - **`evaluate_frames(directory)`**: Evaluates frames for deepfake content using the MesoNet model.
 - **`upload_video(request)`**: Handles the video upload, triggering frame extraction and analysis.
+
+## **Output**
+
+### **Output 1 – Deepfake Detection Results**
+![Results](./github_assests/res.png)
+
+### **Output 2 – Model Accuracy**
+![Accuracy](./github_assests/acc.png)
+
+- **Detection Accuracy:** ~89% (This value reflects the performance metrics of the MesoNet model on the selected dataset.)
+
+## **Results and Impact**
+
+- Successfully implemented a web-based platform for deepfake detection using machine learning.
+- Provides a frame-by-frame analysis for a granular understanding of the detection process.
+- Confidence scores help users interpret the system’s decision-making process.
+- The project addresses the growing issue of deepfake misinformation by providing a tool for video verification.
+
+## **Articles References**
+
+- Xia, Z.; Qiao, T.; Xu, M.; Wu, X.; Han, L.; Chen, Y. *Deepfake Video Detection Based on MesoNet with Preprocessing Module*. Symmetry 2022, 14, 939. https://doi.org/10.3390/sym14050939
+
+- M. S. Rana, M. N. Nobi, B. Murali and A. H. Sung, *Deepfake Detection: A Systematic Literature Review* in IEEE Access, vol. 10, pp. 25494-25513, 2022, https://doi.org/10.1109/ACCESS.2022.3154404
+
+- Zi, Bojia and Chang, Minghao and Chen, Jingjing and Ma, Xingjun and Jiang, Yu-Gang. *WildDeepfake: A Challenging Real-World Dataset for Deepfake Detection*. arXiv 2024 https://arxiv.org/abs/2101.01456
+
+- Afchar, Darius and Nozick, Vincent and Yamagishi, Junichi and Echizen, Isao. *MesoNet: a Compact Facial Video Forgery Detection Network*. IEEE 2018. http://dx.doi.org/10.1109/WIFS.2018.8630761

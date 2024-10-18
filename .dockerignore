@@ -1,0 +1,23 @@
+notebooks/
+venv/
+# Ignore the virtual environment directory
+venv/
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+# Ignore local database files
+db.sqlite3
+# Ignore IDE-specific files
+.idea/
+*.swp
+*.swo
+# Ignore Jupyter notebooks
+*.ipynb
+# Ignore logs and temporary files
+*.log
+*.tmp
+# Ignore other unnecessary files
+README.md
+LICENSE.txt
+.git/
