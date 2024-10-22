@@ -58,7 +58,7 @@ Ensure you have Docker installed on your system.
 1. *Clone the repository:*
 
    ```
-   git clone https://github.com/ShafeeqAhamedS/deepfake-detection.git
+   git clone https://github.com/Meenakshi0907/deepfake-detection.git
    cd deepfake-detection
    ```
    
