@@ -53,6 +53,52 @@ The application leverages the **MesoNet** model, a specialized deep learning arc
 
 Ensure you have Docker installed on your system.
 
+## Installation
+
+1. *Clone the repository:*
+
+   ```
+   git clone https://github.com/ShafeeqAhamedS/deepfake-detection.git
+   cd deepfake-detection
+   ```
+   
+
+2. *Create a virtual environment (optional but recommended):*
+
+   ```
+   python -m venv venv
+   venv\Scripts\activate
+   ```
+   
+
+3. *Install the required libraries:*
+
+   ```
+   pip install -r requirements.txt
+   ```
+   
+4. *Run the Django development server:*
+
+   ```
+   python manage.py runserver 3000
+   ````
+
+5. *Open your web browser and navigate to:*
+
+   ```
+   http://127.0.0.1:3000/
+   ```
+
+6. *Upload a video:*
+
+   - Click on upload video to upload a video file.
+   - The server will process the video, extract frames, and evaluate them using the deepfake detection model.
+
+7. *View the results:*
+
+   - The results page will display each frame's evaluation, including the confidence score and the overall prediction for the video.
+
+
 ## Setup with Docker
 
 1. **Pull the Docker Image:**
